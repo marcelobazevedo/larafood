@@ -3,7 +3,7 @@
 @section('title', 'Detalhes do Perfil')
 
 @section('content_header')
-    <h1>Detalhes do Perfil <b>{{$profile->name}}</b></h1>
+    <h1>Detalhes do Perfil <b>{$profile->name}</b></h1>
 @stop
 
 @section('content')

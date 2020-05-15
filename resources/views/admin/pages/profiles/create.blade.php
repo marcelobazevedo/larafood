@@ -8,11 +8,8 @@
 
 @section('content')
     <div class="card">
-
             <div class="card-body">
                 <form action="{{route('profiles.store')}}" class="form" method="post">
-
-
                     @include('admin.pages.profiles._partials.form')
                 </form>
             </div>

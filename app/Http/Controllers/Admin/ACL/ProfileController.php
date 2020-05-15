@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-
     protected $repository;
 
     public function __construct(Profile $profile)
@@ -57,7 +56,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        if(! $profile = $this->repository->find($id)){
+        if(!$profile = $this->repository->find($id)){
             return redirect()->back();
         }
 
@@ -72,7 +71,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-       if(! $profile = $this->repository->find($id)){
+       if(!$profile = $this->repository->find($id)){
            return redirect()->back();
        }
 
@@ -88,7 +87,7 @@ class ProfileController extends Controller
      */
     public function update(StoreUpdateProfile $request, $id)
     {
-        if(! $profile = $this->repository->find($id)){
+        if(!$profile = $this->repository->find($id)){
             return redirect()->back();
         }
 
@@ -106,7 +105,7 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        if(! $profile = $this->repository->find($id)){
+        if(!$profile = $this->repository->find($id)){
             return redirect()->back();
         }
 
