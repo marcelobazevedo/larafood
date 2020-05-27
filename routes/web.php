@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix('admin')->namespace('Admin')->group(function(){
+Route::prefix('admin')
+            ->namespace('Admin')
+            ->middleware('auth')
+            ->group(function(){
 
     /**
      * Plan x Profile
@@ -67,6 +70,32 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Site\SiteController@index')->name('site.home');
+
+
+/**
+ * Rotas de autenticação
+ */
+
+
+Auth::routes();
+
+
+
+
+
+
+
+
+
+
+
+//Route::get('/home', 'HomeController@index')->name('home');
+
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
+
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
