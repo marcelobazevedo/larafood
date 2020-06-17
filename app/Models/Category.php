@@ -17,4 +17,9 @@ class Category extends Model
         static::observe(TenantObserver::class);
     }
     */
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }
