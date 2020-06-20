@@ -81,6 +81,12 @@ Route::prefix('admin')
     Route::any('profiles/search', 'ACL\ProfileController@search')->name('profiles.search');
     Route::resource('profiles', 'ACL\ProfileController')->middleware('can:profiles');
 
+    /**
+     * Routes Tenants
+     */
+    Route::any('tenants/search', 'TenantController@search')->name('tenants.search');
+    Route::resource('tenants', 'TenantController');
+
 
     /**
      * Routes Details Plans
