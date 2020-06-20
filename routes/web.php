@@ -10,6 +10,10 @@ Route::prefix('admin')
             ->middleware('auth')
             ->group(function(){
 
+              //  Route::get('teste-acl', function(){
+            //           dd(auth()->user()->permissions());
+            //    });
+
 /**
      * Routes Tables
      */
@@ -65,7 +69,7 @@ Route::prefix('admin')
 
 
     /**
-     * Routes Profiles
+     * Routes Permissions
      */
     Route::any('permissions/search', 'ACL\PermissionController@search')->name('permissions.search');
     Route::resource('permissions', 'ACL\PermissionController');
@@ -75,7 +79,7 @@ Route::prefix('admin')
      * Routes Profiles
      */
     Route::any('profiles/search', 'ACL\ProfileController@search')->name('profiles.search');
-    Route::resource('profiles', 'ACL\ProfileController');
+    Route::resource('profiles', 'ACL\ProfileController')->middleware('can:profiles');
 
 
     /**
