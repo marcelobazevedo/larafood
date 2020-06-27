@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Listeners\AddRoleTenant;
-use App\Tenants\Events\TenantCreated;
+use App\Tenant\Events\TenantCreated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

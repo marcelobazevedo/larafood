@@ -8,33 +8,33 @@ trait UserACLTrait
 {
     public function permissions(): array
     {
-       $permissionsPlan = $this->permissionsPlan();
-       $permissionsRole = $this->permissionsRole();
+       // dd($this->permissionsRole());
+        $permissionsPlan = $this->permissionsPlan();
+        $permissionsRole = $this->permissionsRole();
 
         $permissions = [];
-
-        foreach($permissionsRole as $permission)
-        {
+        foreach ($permissionsRole as $permission) {
             if (in_array($permission, $permissionsPlan))
-                    array_push($permissions, $permission);
+                array_push($permissions, $permission);
         }
 
-       return $permissions;
+        return $permissions;
+
+
     }
 
     public function permissionsPlan(): array
     {
-       // $tenant = $this->tenant()->first();
-        //$plan = $tenant->plan;
+        // $tenant = $this->tenant;
+        // $plan = $tenant->plan;
         $tenant = Tenant::with('plan.profiles.permissions')->where('id', $this->tenant_id)->first();
+        //var_dump($tenant);
         $plan = $tenant->plan;
-        $permissions = [];
 
-        foreach($plan->profiles as $profile)
-        {
-            foreach($profile->permissions as $permission)
-            {
-            array_push($permissions, $permission->name);
+        $permissions = [];
+        foreach ($plan->profiles as $profile) {
+            foreach ($profile->permissions as $permission) {
+                array_push($permissions, $permission->name);
             }
         }
 
@@ -44,26 +44,29 @@ trait UserACLTrait
     public function permissionsRole(): array
     {
         $roles = $this->roles()->with('permissions')->get();
+        //dd($roles);
+
         $permissions = [];
-        foreach($roles as $role){
-            foreach($roles->permissions as $permission){
-            array_push($permissions, $permission->name);
+        foreach ($roles as $role) {
+            foreach ($role->permissions as $permission) {
+                array_push($permissions, $permission->name);
             }
         }
+
         return $permissions;
     }
 
-    public function hasPermission(String $permissionName):bool
+    public function hasPermission(string $permissionName): bool
     {
         return in_array($permissionName, $this->permissions());
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return in_array($this->email, config('acl.admins'));
     }
 
-    public function isTenant()
+    public function isTenant(): bool
     {
         return !in_array($this->email, config('acl.admins'));
     }
